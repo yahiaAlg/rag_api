@@ -1,13 +1,11 @@
-# Use NVIDIA CUDA base image
-FROM nvidia/cuda:11.8.0-runtime-ubuntu22.04
+# Use Python base image
+FROM python:3.9-slim
 
 # Set working directory
 WORKDIR /app
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
-    python3 \
-    python3-pip \
     curl \
     && rm -rf /var/lib/apt/lists/*
 

@@ -10,3 +10,4 @@ python-dotenv
 slowapi
 PyPDF2
 python-dotenv
+langchain_community

@@ -7,12 +7,3 @@ services:
       - "8000:8000"
     volumes:
       - ./chroma_db:/app/chroma_db
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: 1
-              capabilities: [gpu]
-    environment:
-      - NVIDIA_VISIBLE_DEVICES=all
