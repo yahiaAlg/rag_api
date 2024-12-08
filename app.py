@@ -1,13 +1,13 @@
 import os
 from typing import List, Optional
-from fastapi import FastAPI, File, UploadFile, HTTPException, Depends
+from fastapi import FastAPI, File, UploadFile, HTTPException, Depends, Request
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain.embeddings import HuggingFaceEmbeddings
-from langchain.vectorstores import Chroma
+from langchain_community.embeddings import HuggingFaceEmbeddings  # Updated import
+from langchain_community.vectorstores import Chroma  # Updated import
 from langchain.chains import RetrievalQA
-from langchain_community.llms import Ollama  # Use this import instead
+from langchain_community.llms import Ollama
 from PyPDF2 import PdfReader
 import chromadb
 from slowapi import Limiter, _rate_limit_exceeded_handler
@@ -50,15 +50,15 @@ MODEL_NAME = "eas/dragon-mistral-v0"
 # Initialize ChromaDB
 client = chromadb.PersistentClient(path=PERSIST_DIRECTORY)
 
-# Initialize embeddings
+# Initialize embeddings (changed to CPU)
 embeddings = HuggingFaceEmbeddings(
     model_name="sentence-transformers/all-mpnet-base-v2",
-    model_kwargs={"device": "cpu"},  # Changed from 'cuda' to 'cpu'
+    model_kwargs={"device": "cpu"},
     encode_kwargs={"normalize_embeddings": True},
 )
 
 # Initialize Ollama
-llm = Ollama(model=MODEL_NAME, base_url="http://localhost:11434")
+llm = Ollama(model=MODEL_NAME, base_url="http://host.docker.internal:11434")
 
 
 class QuestionRequest(BaseModel):

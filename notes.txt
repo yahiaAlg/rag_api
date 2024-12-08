@@ -1,0 +1,5 @@
+{"collection_id":"b3c35ef0-27e3-4151-9d26-20c384a16510","message":"Document processed successfully"}
+
+curl -X POST -H "Content-Type: application/json" \
+    -d '{"question":"your question","collection_id":"b3c35ef0-27e3-4151-9d26-20c384a16510"}' \
+    http://localhost:8098/api/query
