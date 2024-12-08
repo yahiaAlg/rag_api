@@ -58,7 +58,8 @@ embeddings = HuggingFaceEmbeddings(
 )
 
 # Initialize Ollama
-llm = Ollama(model=MODEL_NAME, base_url="http://host.docker.internal:11434")
+# Update the Ollama initialization in app.py
+llm = Ollama(model=MODEL_NAME, base_url="http://host.docker.internal:11435")
 
 
 class QuestionRequest(BaseModel):
